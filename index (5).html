@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carregar SWF Manualmente</title>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+</head>
+<body>
+    <h1>Carregar SWF Manualmente</h1>
+    <div id="container">
+        <p>O arquivo SWF será carregado aqui.</p>
+    </div>
+
+    <script>
+        window.RufflePlayer = window.RufflePlayer || {};
+        document.addEventListener("DOMContentLoaded", () => {
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+            const container = document.getElementById("container");
+            container.innerHTML = ""; // Limpa o conteúdo inicial
+            container.appendChild(player);
+
+            // Caminho manual para o arquivo SWF
+            const swfPath = "main/historia_pascoa.swf"; // Insira o caminho aqui
+
+            try {
+                player.ruffle().load(swfPath); // Carrega o arquivo SWF
+                console.log(`Arquivo SWF carregado com sucesso: ${swfPath}`);
+            } catch (error) {
+                console.error("Erro ao carregar o arquivo SWF:", error);
+                container.innerHTML = "<p>Erro ao carregar o arquivo SWF. Verifique o caminho fornecido.</p>";
+            }
+        });
+    </script>
+</body>
+</html>
